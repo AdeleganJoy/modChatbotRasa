@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Console Test</title>
+    <title>Simple Public API Fetch Test</title>
 </head>
 <body>
-    <h1>Console Test</h1>
+    <h1>Public API Fetch Test</h1>
+    <button id="fetch-button">Fetch Data</button>
+    <div id="data-container"></div>
 
     <script>
-        console.log("Hello from the console!");
-
-        // You can add more console.log statements here
-        console.log("This is another message.");
-
-        // Or log variables
-        let myVariable = "Test variable";
-        console.log(myVariable);
-
-        // Or log objects
-        let myObject = { name: "Example", value: 123 };
-        console.log(myObject);
-
-        // Or log arrays
-        let myArray = [1, 2, 3, "test"];
-        console.log(myArray);
-
-        // Or log warnings
-        console.warn("This is a warning!");
-
-        // Or log errors
-        console.error("This is an error!");
+        document.getElementById('fetch-button').onclick = function() {
+            fetch('https://jsonplaceholder.typicode.com/todos/1') // A public test API
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('data-container').innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    document.getElementById('data-container').innerHTML = 'Error: ' + error.message;
+                });
+        };
     </script>
 </body>
 </html>
