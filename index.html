@@ -1,48 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Minimal Chat Test</title>
+    <title>Simple Console Test</title>
 </head>
 <body>
-    <div id="chat-box"></div>
-    <input type="text" id="user-input">
-    <button id="send-button">Send</button>
+    <h1>Console Test</h1>
 
     <script>
-        document.getElementById('send-button').onclick = function() {
-            const userMessage = document.getElementById('user-input').value;
-            if (!userMessage.trim()) return;
+        console.log("Hello from the console!");
 
-            fetch('https://2911-2001-14bb-11e-c0e6-c4f0-fa5a-c62f-51b3.ngrok-free.app/webhooks/rest/webhook', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "sender": "user", "message": userMessage })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const contentType = response.headers.get("content-type");
-                if (!contentType || !contentType.includes("application/json")) {
-                    throw new TypeError("Expected JSON, but received non-JSON");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                if (data && data.length > 0 && data[0].text) {
-                    document.getElementById('chat-box').innerHTML += '<p>Bot: ' + data[0].text + '</p>';
-                } else {
-                    document.getElementById('chat-box').innerHTML += '<p>Bot: No response received.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('chat-box').innerHTML += '<p>Error: ' + error.message + '</p>';
-            });
+        // You can add more console.log statements here
+        console.log("This is another message.");
 
-            document.getElementById('user-input').value = ''; // Clear input
-        };
+        // Or log variables
+        let myVariable = "Test variable";
+        console.log(myVariable);
+
+        // Or log objects
+        let myObject = { name: "Example", value: 123 };
+        console.log(myObject);
+
+        // Or log arrays
+        let myArray = [1, 2, 3, "test"];
+        console.log(myArray);
+
+        // Or log warnings
+        console.warn("This is a warning!");
+
+        // Or log errors
+        console.error("This is an error!");
     </script>
 </body>
 </html>
