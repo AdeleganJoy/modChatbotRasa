@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fetch with POST</title>
+  <title>Rasa API Test</title>
 </head>
 <body>
 
-<script>
-  const url = 'https://c6bf-2001-14bb-11e-c0e6-c4f0-fa5a-c62f-51b3.ngrok-free.app/webhook';
-  const data = {
-    "next_action": "action_calc_mod",
-    "sender_id": "test_user",
-    "tracker": {
-      "sender_id": "test_user",
-      "latest_message": {
-        "text": "What is 13 mod 4?",
-        "intent": {
-          "name": "calculate_mod_base"
-        },
-        "entities": []
-      },
-      "slots": {},
-      "events": [],
-      "paused": false,
-      "latest_event_time": null,
-      "followup_action": null,
-      "active_loop": {},
-      "latest_input_channel": null
-    },
-    "domain": {
-      "intents": ["calculate_mod_base"],
-      "actions": ["action_calc_mod"],
-      "responses": {},
-      "slots": {}
-    },
-    "version": "3.1"
-  };
+  <input type="text" id="messageInput" placeholder="Enter your message">
+  <button id="sendButton">Send</button>
 
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    console.log('Result:', result);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-</script>
+  <script>
+    document.getElementById('sendButton').addEventListener('click', function() {
+      const message = document.getElementById('messageInput').value;
+      const ngrokUrl = 'https://c6bf-2001-14bb-11e-c0e6-c4f0-fa5a-c62f-51b3.ngrok-free.app/'; // Replace with your ngrok URL
+      const url = `${ngrokUrl}/webhooks/rest/webhook`;
+
+      const data = {
+        sender: 'browser_user',
+        message: message
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Rasa Response:', result);
+        // You can also display the result on the webpage if needed
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
 
 </body>
 </html>
