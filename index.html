@@ -91,7 +91,7 @@ function sendMessage() {
     document.getElementById('user-input').value = '';
 
     // Send the message to Rasa via POST request
-    fetch('https://cf1c-2001-14bb-11e-c0e6-c4f0-fa5a-c62f-51b3.ngrok-free.app/webhooks/rest/webhook', {
+    fetch('https://c79d-193-166-177-70.ngrok-free.app/webhooks/rest/webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "sender": "user", "message": userMessage })
