@@ -54,6 +54,33 @@
             color: #271c5d;
             margin-top: 20px;
         }
+        #typing-indicator {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #5850c0;
+        border-radius: 50%;
+        animation: blink 1.4s infinite both;
+    }
+    dot:nth-child(2) {
+    animation-delay: 0.2s;
+    }
+    
+    .dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes blink {
+        0% { opacity: 0.2; }
+        20% { opacity: 1; }
+        100% { opacity: 0.2; }
+    }
     </style>
 </head>
 <body>
@@ -61,6 +88,11 @@
 
     <!-- Chat container -->
     <div class="chat-box" id="chat-box"></div>
+    <div id="typing-indicator" style="display: none; margin: 10px;">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    </div>
 
     <!-- Input and send button -->
     <div class="input-container">
@@ -86,12 +118,12 @@ function sendMessage() {
     userMessageElement.style.borderRadius = "10px"; // Rounded corners for user message
     userMessageElement.style.border = "1px solid #ccc"; // Border around user message
     document.getElementById('chat-box').appendChild(userMessageElement);
-
+    document.getElementById('typing-indicator').style.display = 'flex';
     // Clear the input field
     document.getElementById('user-input').value = '';
 
     // Send the message to Rasa via POST request
-    fetch('https://655b-2001-14bb-ad-62d3-2191-f847-6f6b-1c7.ngrok-free.app/webhooks/rest/webhook', {
+    fetch('https://1cfe-2001-14bb-ad-62d3-bcd6-5ad7-9223-d390.ngrok-free.app/webhooks/rest/webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "sender": "user", "message": userMessage })
@@ -115,7 +147,7 @@ function sendMessage() {
         botMessageElement.style.borderRadius = "10px"; // Rounded corners for bot message
         botMessageElement.style.border = "1px solid #ccc"; // Border around bot message
         document.getElementById('chat-box').appendChild(botMessageElement);
-
+        document.getElementById('typing-indicator').style.display = 'none';
         // Scroll to the bottom of the chat box
         document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
     })
