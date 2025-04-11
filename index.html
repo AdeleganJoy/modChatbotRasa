@@ -89,11 +89,11 @@
     <!-- Chat container -->
     <div class="chat-box" id="chat-box"></div>
     <div id="typing-indicator" style="display: none; margin: 10px;">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     </div>
-
+    
     <!-- Input and send button -->
     <div class="input-container">
         <input type="text" id="user-input" placeholder="Type your message..." />
@@ -118,12 +118,13 @@ function sendMessage() {
     userMessageElement.style.borderRadius = "10px"; // Rounded corners for user message
     userMessageElement.style.border = "1px solid #ccc"; // Border around user message
     document.getElementById('chat-box').appendChild(userMessageElement);
-    document.getElementById('typing-indicator').style.display = 'flex';
+
     // Clear the input field
     document.getElementById('user-input').value = '';
 
+    document.getElementById('typing-indicator').style.display = 'flex';
     // Send the message to Rasa via POST request
-    fetch('https://a62b-2001-14bb-ad-62d3-bcd6-5ad7-9223-d390.ngrok-free.app/webhooks/rest/webhook', {
+    fetch('https://68cd-2001-14bb-ad-62d3-390f-9ff7-2597-5866.ngrok-free.app/webhooks/rest/webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "sender": "user", "message": userMessage })
