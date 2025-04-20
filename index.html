@@ -102,6 +102,26 @@
 
     <script>
         // Function to send message to Rasa and update chat box
+
+window.onload = function () {
+    // This will only run once, immediately after the page loads
+    const welcomeMessage = "Hi! I'm your module assistant. Ask me anything about your courses!";
+    
+    // Code to display this message in the chat box
+    const botMessageElement = document.createElement('div');
+    botMessageElement.innerHTML = "Bot: " + welcomeMessage;
+    botMessageElement.style.marginBottom = "10px";
+    botMessageElement.style.padding = "10px";
+    botMessageElement.style.backgroundColor = "#fff";
+    botMessageElement.style.color = "#5850c0";
+    botMessageElement.style.borderRadius = "10px";
+    botMessageElement.style.border = "1px solid #ccc";
+    document.getElementById('chat-box').appendChild(botMessageElement);
+
+    // Scroll down to the most recent message
+    document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+};
+        
 // Function to send message to Rasa and update chat box
 function sendMessage() {
     const userMessage = document.getElementById('user-input').value;
