@@ -150,7 +150,7 @@ function sendMessage() {
 
     document.getElementById('typing-indicator').style.display = 'flex';
     // Send the message to Rasa via POST request
-    fetch('https://0299-132-147-119-101.ngrok-free.app/webhooks/rest/webhook', {
+    fetch('https://29df-219-74-75-94.ngrok-free.app/webhooks/rest/webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "sender": "user", "message": userMessage })
